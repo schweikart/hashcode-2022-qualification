@@ -70,8 +70,8 @@ public class Project {
     this.roles[skillIndexMap.get(skill)] = role;
   }
 
-  public List<Role> getRoles() {
-    return Arrays.asList(this.roles);
+  public Role[] getRoles() {
+    return this.roles.clone();
   }
 
   @Override
