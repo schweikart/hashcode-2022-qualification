@@ -44,10 +44,20 @@ public class Algorithm {
     return new Solution(doableProjects);
   }
 
+  private int updateSkillLevelNeeded(Project project, int initialLevel, Skill skill) {
+    for (int r = 0; r < project.getRoles().length; r++) {
+      Role role = project.getRoles()[r];
+      if(role.skill == skill && role.contributor != null && role.contributor.getSkillLevel(skill) == initialLevel) {
+        return initialLevel-1;
+      }
+    }
+    return initialLevel;
+  }
+
   private boolean assignContributors(Project project) {
     for (int r = 0; r < project.getRoles().length; r++) {
       Role role = project.getRoles()[r];
-      int requiredSkillLevel = role.requiredLevel;
+      int requiredSkillLevel = updateSkillLevelNeeded(project, role.requiredLevel, role.skill);
 
       int bestC = -1;
       int bestSkillLevel = Integer.MAX_VALUE;
