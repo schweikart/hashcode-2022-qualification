@@ -31,6 +31,13 @@ public class Algorithm {
       if (assignContributors(project)) {
         doableProjects.add(project);
         lastDay += project.getDuration(); // check best before
+
+        for (int r = 0; r < project.getRoles().length; r++) {
+          Role role = project.getRoles()[r];
+          if (role.contributor.getSkillLevel(role.skill) <= role.requiredLevel) {
+            role.contributor.learn(role.skill);
+          }
+        }
       }
     }
 
@@ -98,17 +105,12 @@ public class Algorithm {
       this.projects[i].value = calculateValue(projects[i]);
     }
     Arrays.sort(projects, Comparator.comparingDouble(p -> p.value));
-
-
-    for (int i = 0; i < projects.length; i++) {
-      System.out.println(projects[i].value);
-    }
   }
 
   private double calculateValue(Project project) {
     double scoreValue = project.getScore() / this.averageScore;
-    double deadlineValue =  this.averageDeadline / project.getBestBeforeDate(); // low is better
-    double durationValue = this.averageDuration / project.getDuration(); // low is better
+    double deadlineValue =  project.getBestBeforeDate() / this.averageDeadline; // high -> later
+    double durationValue = project.getDuration() / this.averageDuration; // low is better
     double roleAmountValue = this.averageRoleAmount / project.getRoles().length; // low is better
     double skillLevelValue = this.averageSkillLevel / project.skillLevelAverage; // low is better
 
