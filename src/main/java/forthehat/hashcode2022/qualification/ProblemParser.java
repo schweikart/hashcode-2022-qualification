@@ -2,40 +2,38 @@ package forthehat.hashcode2022.qualification;
 
 import java.util.*;
 
-public class ProblemParser {
-    private final Iterator<String> inputLineIterator;
-    private Contributor[] contributorArray;
-    private Project[] projectArray;
+public record ProblemParser(Iterator<String> inputLineIterator) {
 
     public ProblemParser(Iterator<String> inputLineIterator) {
         this.inputLineIterator = Objects.requireNonNull(inputLineIterator);
     }
 
-    public void parseProblem() {
+    public Problem parseProblem() {
         String[] amounts = inputLineIterator.next().trim().split("\\s+");
         int contributorsAmount = Integer.parseInt(amounts[0]);
         int projectAmount = Integer.parseInt(amounts[1]);
-        this.contributorArray = new Contributor[contributorsAmount];
-        this.projectArray = new Project[projectAmount];
+        var contributorArray = new Contributor[contributorsAmount];
+        var projectArray = new Project[projectAmount];
 
         //all contributors
-        for(int i = 0; i < contributorsAmount; i++) {
+        for (int i = 0; i < contributorsAmount; i++) {
             String[] contributorLine = inputLineIterator.next().trim().split("\\s+");
             String name = contributorLine[0];
             int skillAmount = Integer.parseInt(contributorLine[1]);
             Set<Tuple<Skill, Integer>> skillSet = new HashSet<>();
 
             //parse skills of contributor
-            for(int j = 0; j < skillAmount; j++) {
+            for (int j = 0; j < skillAmount; j++) {
                 String[] skill = inputLineIterator.next().trim().split("\\s+");
-                Tuple<Skill, Integer> skillTuple = new Tuple<>(new Skill(skill[0]), Integer.parseInt(skill[1]));
+                Tuple<Skill, Integer> skillTuple =
+                    new Tuple<>(new Skill(skill[0]), Integer.parseInt(skill[1]));
                 skillSet.add(skillTuple);
             }
             contributorArray[i] = new Contributor(name, skillSet);
         }
 
         //all projects
-        for(int i = 0; i < projectAmount; i++) {
+        for (int i = 0; i < projectAmount; i++) {
             String[] projectLine = inputLineIterator.next().trim().split("\\s+");
             String name = projectLine[0];
             int duration = Integer.parseInt(projectLine[1]);
@@ -45,7 +43,7 @@ public class ProblemParser {
             List<Requirement> requirementList = new ArrayList<>(roleAmount);
 
             //parse roles of project
-            for(int j = 0; j < roleAmount; j++) {
+            for (int j = 0; j < roleAmount; j++) {
                 String[] role = inputLineIterator.next().trim().split("\\s+");
 
                 Requirement requirement = new Requirement(new Skill(role[0]), Integer.parseInt(role[1]));
@@ -60,15 +58,7 @@ public class ProblemParser {
         }
 
         System.out.printf("Parsed problem with %d contributors and %d different projects%n",
-                this.contributorArray.length, this.projectArray.length);
-        //return new Problem();
-    }
-
-    public Contributor[] getContributorArray() {
-        return contributorArray;
-    }
-
-    public Project[] getProjectArray() {
-        return projectArray;
+            contributorArray.length, projectArray.length);
+        return new Problem(contributorArray, projectArray);
     }
 }
