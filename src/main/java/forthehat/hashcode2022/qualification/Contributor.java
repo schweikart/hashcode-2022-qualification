@@ -26,8 +26,13 @@ public class Contributor {
   }
 
   public void learn(Skill skill) {
-    int oldLevel = skillLevels.get(skill);
-    this.skillLevels.remove(skill);
-    this.skillLevels.put(skill, oldLevel + 1);
+    if (skillLevels.containsKey(skill)) {
+      int oldLevel = skillLevels.get(skill);
+      this.skillLevels.remove(skill);
+      this.skillLevels.put(skill, oldLevel + 1);
+    } else {
+      this.skillLevels.put(skill, 1);
+    }
+
   }
 }
