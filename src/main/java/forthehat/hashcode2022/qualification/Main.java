@@ -13,20 +13,20 @@ public class Main {
     System.out.println("FOR THE HAT!");
 
     solveProblem("a_an_example");
-    /*
     solveProblem("b_better_start_small");
     solveProblem("c_collaboration");
-    solveProblem("d_dense_in_schedule");
-    solveProblem("e_exceptional_mentors");
+    solveProblem("d_dense_schedule");
+    solveProblem("e_exceptional_skills");
     solveProblem("f_find_great_mentors");
-     */
   }
 
   private static void solveProblem(String problemName) {
     Iterator<String> lineIterator = getLineIteratorForResource(String.format("%s.in.txt", problemName));
     Problem problem = new ProblemParser(lineIterator).parseProblem();
 
-    Solution solution = new Solution(); //here solution of problem-solving
+    Algorithm algorithm = new Algorithm(problem);
+
+    Solution solution = algorithm.solve();
     SolutionWriter.writeSolution(Path.of(String.format("./out/%s.out.txt", problemName)), solution);
   }
 

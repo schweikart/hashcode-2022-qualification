@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Contributor {
+  public Project lastProject;
 
   private final String name;
 
@@ -22,7 +23,8 @@ public class Contributor {
   }
 
   public int getSkillLevel(Skill skill) {
-    return this.skillLevels.get(skill);
+    Integer value = this.skillLevels.get(skill);
+    return value == null ? 0 : value;
   }
 
   public void learn(Skill skill) {

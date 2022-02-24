@@ -17,6 +17,9 @@ public class Project {
 
   private final Role[] roles;
 
+  public double skillLevelAverage;
+  public double value;
+
   public Project(String name, int duration, int score, int bestBeforeDate, Role[] roles) {
     this.name = name;
     this.duration = duration;
