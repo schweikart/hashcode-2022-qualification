@@ -79,8 +79,8 @@ public class Project {
     return String.format("%s\n %s\n", this.name, getStringRep(this.roles));
   }
 
-  private static String getStringRep(Role[] roles) {
-    StringBuilder stringRepBuilder = new StringBuilder();
+  private String getStringRep(Role[] roles) {
+    StringBuilder stringRepBuilder = new StringBuilder(this.name + "\n");
     for (Role role : roles) {
       stringRepBuilder.append(String.format("%s ", role.contributor().getName()));
     }
