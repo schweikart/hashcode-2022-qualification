@@ -40,17 +40,17 @@ public record ProblemParser(Iterator<String> inputLineIterator) {
             int score = Integer.parseInt(projectLine[2]);
             int bestBefore = Integer.parseInt(projectLine[3]);
             int roleAmount = Integer.parseInt(projectLine[4]);
-            List<Requirement> requirementList = new ArrayList<>(roleAmount);
+            Role[] roles = new Role[roleAmount];
 
             //parse roles of project
             for (int j = 0; j < roleAmount; j++) {
-                String[] role = inputLineIterator.next().trim().split("\\s+");
+                String[] roleString = inputLineIterator.next().trim().split("\\s+");
 
-                Requirement requirement = new Requirement(new Skill(role[0]), Integer.parseInt(role[1]));
-                requirementList.add(requirement);
+                var role = new Role(new Skill(roleString[0]), Integer.parseInt(roleString[1]));
+                roles[j] = role;
             }
 
-            projectArray[i] = new Project(name, duration, score, bestBefore, requirementList);
+            projectArray[i] = new Project(name, duration, score, bestBefore, roles);
         }
 
         if (inputLineIterator.hasNext()) {
