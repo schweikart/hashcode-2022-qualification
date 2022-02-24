@@ -80,7 +80,7 @@ public class Project {
   }
 
   private String getStringRep(Role[] roles) {
-    StringBuilder stringRepBuilder = new StringBuilder(this.name + "\n");
+    StringBuilder stringRepBuilder = new StringBuilder();
     for (Role role : roles) {
       stringRepBuilder.append(String.format("%s ", role.contributor().getName()));
     }
