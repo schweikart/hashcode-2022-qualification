@@ -9,17 +9,6 @@ import java.util.List;
 
 public class SolutionWriter {
     public static void writeSolution(Path path, Solution solution) {
-        /*
-        //size = firstLine, each project = 2 lines (name, contributors)
-        List<String> contents = new ArrayList<>(1+ 2* solution.projectList.size());
-        contents.add(String.valueOf(solution.projectList.size()) + "\n");
-
-        /*
-        for (var ingredient : selection.ingredients()) {
-            contents.add(ingredient.name());
-        }
-         */
-
         if (!Files.isDirectory(path.getParent())) {
             try {
                 Files.createDirectory(path.getParent());

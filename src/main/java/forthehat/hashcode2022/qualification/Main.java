@@ -11,13 +11,20 @@ import java.util.Objects;
 public class Main {
   public static void main(String[] args) {
     System.out.println("FOR THE HAT!");
+
+    solveProblem("a_an_example");
+    solveProblem("b_basic");
+    solveProblem("c_coarse");
+    solveProblem("d_difficult");
+    solveProblem("e_elaborate");
   }
 
   private static void solveProblem(String problemName) {
     Iterator<String> lineIterator = getLineIteratorForResource(String.format("%s.in.txt", problemName));
-    new ProblemParser(lineIterator).parseProblem();
+    Problem problem = new ProblemParser(lineIterator).parseProblem();
 
-    //SolutionWriter.writeSolution(Path.of(String.format("./out/%s.out.txt", problemName)), new Selection(List.of(), List.of()));
+    Solution solution = new Solution(); //here solution of problem-solving
+    SolutionWriter.writeSolution(Path.of(String.format("./out/%s.out.txt", problemName)), solution);
   }
 
   private static Iterator<String> getLineIteratorForResource(String resourceName) {
