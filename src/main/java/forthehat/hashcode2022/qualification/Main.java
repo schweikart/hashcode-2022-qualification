@@ -13,11 +13,13 @@ public class Main {
     System.out.println("FOR THE HAT!");
 
     solveProblem("a_an_example");
+    /*
     solveProblem("b_better_start_small");
     solveProblem("c_collaboration");
     solveProblem("d_dense_in_schedule");
     solveProblem("e_exceptional_mentors");
     solveProblem("f_find_great_mentors");
+     */
   }
 
   private static void solveProblem(String problemName) {
