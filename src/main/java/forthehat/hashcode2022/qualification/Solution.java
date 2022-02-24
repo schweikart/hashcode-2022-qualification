@@ -16,10 +16,11 @@ public class Solution {
 
   @Override
   public String toString() {
-    StringBuilder stringRep = new StringBuilder(projects.size() + "\n");
+    StringBuilder stringRepBuilder = new StringBuilder(projects.size() + "\n");
     for (Project project : projects) {
-      stringRep.append(project.toString());
+      stringRepBuilder.append(project.toString());
     }
-    return stringRep.toString();
+    var stringRep = stringRepBuilder.toString();
+    return stringRep.substring(0, stringRep.length() - 1);
   }
 }

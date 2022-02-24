@@ -47,7 +47,7 @@ public class Project {
 
   @Override
   public String toString() {
-    return String.format("%s\n %s\n", this.name, getStringRep(this.roles));
+    return String.format("%s\n%s\n", this.name, getStringRep(this.roles));
   }
 
   private String getStringRep(Role[] roles) {
